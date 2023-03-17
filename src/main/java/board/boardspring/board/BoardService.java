@@ -2,26 +2,26 @@ package board.boardspring.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
 
-    private final BoardRepository boardRepository;
+    private final BoardMapper boardMapper;
 
-    public List<Board> BoardList() {
-        return boardRepository.selectAll();
+    public Board updateBoard (Board board) {
+        return boardMapper.updateBoard(board);
     }
 
-    public Optional<Board> BoardOne(String nickName) {
-        return boardRepository.selctOne(nickName);
+    public String deleteBoard (Board board) {
+        return boardMapper.deleteBoard(board);
     }
 
-    public void BoardAdd(Board board) {
-        boardRepository.insertOne(board);
+    public String checkBoard (Board board) {
+        return boardMapper.checkBoard(board);
+    }
+
+    public String search (String title, String nickName) {
+        return boardMapper.search(title,nickName);
     }
 }
