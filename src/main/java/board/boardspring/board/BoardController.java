@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -42,5 +44,20 @@ public class BoardController {
     @GetMapping("/board/search/{title}/{nickName}")
     public String search (@PathVariable(value = "title") String title, @PathVariable(value = "nickName") String nickName) {
         return boardService.search(title,nickName);
+    }
+
+    @PostMapping("/board/insertBoard")
+    public String insertBoard(@RequestBody Board board) {
+        return boardService.insertBoard(board);
+    }
+
+    @GetMapping("/board/listBoard")
+    public List<Board> listBoard (@PathVariable Board board) {
+        return boardService.listBoard(board);
+    }
+
+    @GetMapping("/board/detailBoard/{nickName}")
+    public Board detailBoard (@PathVariable String nickName) {
+        return boardService.detailBoard(nickName);
     }
 }

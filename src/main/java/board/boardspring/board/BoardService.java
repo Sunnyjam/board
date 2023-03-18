@@ -3,6 +3,8 @@ package board.boardspring.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -24,4 +26,17 @@ public class BoardService {
     public String search (String title, String nickName) {
         return boardMapper.search(title,nickName);
     }
+
+    public String insertBoard(Board board) {
+        return boardMapper.insertBoard(board);
+    }
+
+    public List<Board> listBoard(Board board) {
+        return boardMapper.listBoard(board);
+    }
+
+    public Board detailBoard (String nickName) {
+        return boardMapper.detailBoard(nickName);
+    }
+
 }
