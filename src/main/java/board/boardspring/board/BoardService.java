@@ -1,42 +1,53 @@
 package board.boardspring.board;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class BoardService {
 
-    private final BoardMapper boardMapper;
+    /**
+     *         map.put("title", board);
+     *         map.put("content", board);
+     *         map.put("nickName", board);
+     * */
+    Map<String, Board> map = new HashMap<>();
+    List<Board> boards = new ArrayList<>();
 
-    public Board updateBoard (Board board) {
-        return boardMapper.updateBoard(board);
+    public void updateBoard (Board board) {
+        map.put("title", board);
+        map.put("content", board);
+        map.put("nickName", board);
     }
 
-    public String deleteBoard (Board board) {
-        return boardMapper.deleteBoard(board);
+    public void deleteBoard () {
+        map.clear();
+    }
+    public List<Board> search (Board board) {
+        return board.search(board);
     }
 
-    public String checkBoard (Board board) {
-        return boardMapper.checkBoard(board);
+    public void insertBoard(Board board) {
+        map.put("title", board);
+        map.put("content", board);
+        map.put("nickName", board);
     }
 
-    public String search (String title, String nickName) {
-        return boardMapper.search(title,nickName);
+    public List<Board> listBoard() {
+        map.get("title");
+        map.get("content");
+        map.get("nickName");
+
+        System.out.println(map);
+        return null;
     }
 
-    public String insertBoard(Board board) {
-        return boardMapper.insertBoard(board);
-    }
-
-    public List<Board> listBoard(Board board) {
-        return boardMapper.listBoard(board);
-    }
-
-    public Board detailBoard (String nickName) {
-        return boardMapper.detailBoard(nickName);
+    public Board detail(String title) {
+        return map.get(title);
     }
 
 }

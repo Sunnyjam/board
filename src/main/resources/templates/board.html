@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>게시판</title>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+</head>
+<body>
+<h1>게시판</h1>
+<div class="col-md-12">
+    <br/>
+    <br/>
+    <br/>
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>타이틀</th>
+            <th>본문</th>
+            <th>닉네임</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.size(post)} > 0" th:each="post : ${post}">
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.content}"></td>
+            <td th:text="${post.nickName}"></td>
+        </tr>
+        <tr th:unless="${#lists.size(post)} > 0">
+            <td colspan="4">조회된 결과가 없습니다.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-12">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">게시물 등록</button>
+</div>
+
+<div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="savePostsLabel">게시물 등록</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="frm" method="post">
+                    <div class="form-group">
+                        <label for="title">타이틀</label>
+                        <input type="text" class="form-control" id="title" placeholder="타이틀을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="nickName"> 닉네임 </label>
+                        <input type="text" class="form-control" id="nickName" placeholder="닉네임을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="content"> 본문 </label>
+                        <textarea class="form-control" id="content" placeholder="본문을 입력하세요"></textarea>
+                    </div>
+                    <input type="hidden" id="method" name="_method"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+
+<script src="/js/app/main.js"></script>
+</body>
+</html>
